@@ -1,29 +1,43 @@
-# Task-Prioritization-System-with-AI
+# Kanban - Front Fabrica De Projetos 
 
-This template should help get you started developing with Vue 3 in Vite.
+---
 
-## Recommended IDE Setup
+Este projeto é uma aplicação de quadro Kanban interativa, desenvolvida com Vue 3 e Vite. Ele permite aos usuários gerenciar tarefas visualmente através de colunas, com funcionalidade de drag-and-drop, criação, edição e exclusão de tarefas.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+A aplicação inclui gerenciamento de estado centralizado com Pinia, garantindo que os dados sejam consistentes em toda a interface, e utiliza o localStorage para persistir o estado do quadro, salvando o trabalho do usuário entre as sessões.
 
-## Customize configuration
+---
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Features
 
-## Project Setup
+**Quadro Kanban:** Visualize colunas (Ex: "Para Fazer", "Em Progresso", "Concluído").
 
-```sh
-npm install
-```
+**Drag & Drop:** Mova tarefas facilmente entre as colunas.
 
-### Compile and Hot-Reload for Development
+**Gerenciamento de Tarefas:** Crie, edite e exclua tarefas através de um modal detalhado.
 
-```sh
-npm run dev
-```
+**Persistência de Dados:** Seu quadro é salvo automaticamente no localStorage do navegador.
 
-### Compile and Minify for Production
+**Navegação por Rotas:** O projeto usa o Vue Router para navegar entre diferentes seções:
 
-```sh
-npm run build
-```
+- /(Quadro Kanban Principal)
+
+- /reports (Página de Relatórios)
+
+- /team (Página de Equipe)
+
+**Design Responsivo:** A interface é limpa e funcional em diferentes tamanhos de tela.
+
+---
+
+## Stack Tecnológica
+**Vue 3** (usando Composition API e <script setup>)
+
+**Vite** (para um ambiente de desenvolvimento rápido)
+
+**Pinia** (para gerenciamento de estado global)
+
+**Vue Router** (para roteamento no lado do cliente)
+
+---
+

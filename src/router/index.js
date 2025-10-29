@@ -8,7 +8,22 @@ const router = createRouter({
       path: '/',
       name: 'kanban',
       component: KanbanView
-    }
+    },
+    {
+      path: '/reports',
+      name: 'reports',
+      component: () => import('../views/ReportsView.vue')
+    },
+    {
+      path: '/team',
+      name: 'team',
+      component: () => import('../views/TeamView.vue')
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('../views/SettingsView.vue')
+    },
   ]
 })
 
