@@ -150,6 +150,7 @@ function cancelDelete() {
   flex-direction: column;
   gap: 1rem;
   overflow: hidden;
+  box-shadow: 6px 2px 16px rgba(0, 0, 0, 0.2);
 }
 
 .column-color-bar {

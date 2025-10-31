@@ -45,7 +45,7 @@ import SidebarComponent from "./components/SidebarComponent.vue";
 
 main {
   flex-grow: 1;
-  background-color: #edf2f7;
+  background: linear-gradient(to bottom, #ccd3d5, #ede8e8, #dfdfdf);
   overflow-y: auto;
 }
 </style>
