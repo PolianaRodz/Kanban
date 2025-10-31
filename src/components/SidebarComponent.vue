@@ -3,13 +3,13 @@
     <div class="sidebar-content">
       <nav class="main-nav">
         <RouterLink to="/" class="nav-link" title="Quadro Kanban">
-          <LayoutGrid :size="24" />
+          <LayoutGrid :size="35" />
         </RouterLink>
         <RouterLink to="/team" class="nav-link" title="Equipe">
-          <UsersRound :size="24" />
+          <UsersRound :size="35" />
         </RouterLink>
         <RouterLink to="/reports" class="nav-link" title="Relatórios">
-          <BarChart3 :size="24" />
+          <BarChart3 :size="35" />
         </RouterLink>
       </nav>
 
@@ -29,49 +29,51 @@ import { LayoutGrid, UsersRound, BarChart3, Settings } from "lucide-vue-next";
 
 <style scoped>
 .sidebar {
-  width: 5rem;
-  background-color: #f4f7fa;
-  border-right: 0.0625rem solid #e2e8f0;
-  height: 100vh;
+  width: 8rem;
+  background-color: transparent;
+  border-right: 0.0625rem solid #87919e;
   padding: 1rem 0;
   box-sizing: border-box;
+}
 
-  .sidebar-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    align-items: center;
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  align-items: center;
+}
+.main-nav,
+.bottom-nav {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
 
-    .main-nav,
-    .bottom-nav {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      width: 100%;
-    }
+.nav-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 7.8rem;
+  height: 5rem;
+  color: #756b86;
+  transition: all 0.2s ease-in-out;
+}
 
-    .nav-link {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 3rem;
-      height: 3rem;
-      border-radius: 0.5rem;
-      color: #718096;
-      transition: all 0.2s ease-in-out;
+.nav-link:hover {
+  background-color: #e2e8f0;
+  color: #262038;
+}
 
-      &:hover {
-        background-color: #e2e8f0;
-        color: #1a202c;
-      }
+.nav-link.router-link-active {
+  background: linear-gradient(
+    to left,
 
-      &.router-link-active {
-        background-color: #d6eaf8;
-        color: #2b6cb0;
-      }
-    }
-  }
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(236, 239, 241, 0) 70%
+  );
 }
 </style>

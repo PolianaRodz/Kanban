@@ -76,7 +76,6 @@ const props = defineProps({
     type: String,
     default: "linear-gradient(to right, #6b7280, #4a5568)",
   },
-  // -----------------------
 });
 
 const emit = defineEmits([
@@ -141,7 +140,7 @@ function cancelDelete() {
 
 <style scoped>
 .kanban-column {
-  background-color: #e2e8f0;
+  background-color: #f1efef;
   border-radius: 0.75rem;
   padding: 1rem;
   min-width: 20rem;
@@ -151,6 +150,24 @@ function cancelDelete() {
   gap: 1rem;
   overflow: hidden;
   box-shadow: 6px 2px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
+  isolation: isolate;
+}
+
+.kanban-column::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../assets/imgs/background-texture.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+  z-index: -1;
+  border-radius: inherit;
 }
 
 .column-color-bar {
@@ -158,16 +175,32 @@ function cancelDelete() {
   margin-top: -1rem;
   margin-left: -1rem;
   margin-right: -1rem;
+  position: relative;
+  z-index: 2;
 }
 
 .column-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .column-title {
   font-weight: 600;
+}
+
+.column-title-input {
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e0;
+  width: 100%;
+}
+.column-title-input:focus {
+  outline: 2px solid #2b6cb0;
 }
 
 .cards-container {
@@ -177,6 +210,8 @@ function cancelDelete() {
   flex-grow: 1;
   overflow-y: auto;
   min-height: 50px;
+  position: relative;
+  z-index: 1;
 }
 
 .options-btn,
@@ -190,6 +225,8 @@ function cancelDelete() {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  position: relative;
+  z-index: 1;
 }
 
 .add-card-btn {

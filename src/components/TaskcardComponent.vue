@@ -47,7 +47,6 @@
 <script setup>
 import { MessageSquareText, Paperclip, Plus } from "lucide-vue-next";
 
-// Define as props que o componente recebe
 const props = defineProps({
   task: {
     type: Object,
@@ -59,10 +58,8 @@ const props = defineProps({
   },
 });
 
-// Define os eventos que o componente pode emitir
 const emit = defineEmits(["openTaskDetail", "openAssigneePopup"]);
 
-// A função de arrastar (drag)
 function onDragStart(event) {
   event.dataTransfer.setData("taskId", props.task.id.toString());
   event.dataTransfer.effectAllowed = "move";
@@ -81,7 +78,26 @@ function onDragStart(event) {
   gap: 0.75rem;
   border: 1px solid #e2e8f0;
   transition: box-shadow 0.2s ease-in-out;
+  position: relative;
+  isolation: isolate;
 }
+
+.task-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid #28292e;
+  background-image: url("../assets/imgs/background-texture.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  z-index: -1;
+  border-radius: inherit;
+}
+
 .task-card:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -135,26 +151,22 @@ function onDragStart(event) {
   color: #718096;
 }
 
-/* --- MUDANÇA AQUI --- */
-/* Estilo para o <button> que segura a imagem */
 .assignee {
-  width: 1.5rem; /* 24px */
-  height: 1.5rem; /* 24px */
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  padding: 0; /* Remove padding do botão */
-  overflow: hidden; /* Garante que a imagem não vaze */
+  padding: 0;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Estilo para a imagem <img> dentro do botão */
 .avatar-task-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-/* --- FIM DA MUDANÇA --- */
 </style>

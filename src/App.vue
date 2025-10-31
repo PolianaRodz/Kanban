@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
-    <SidebarComponent />
+    <NavbarComponent />
 
-    <div class="main-content">
-      <NavbarComponent />
+    <div class="main-content-wrapper">
+      <SidebarComponent />
       <main>
         <RouterView />
       </main>
@@ -34,18 +34,38 @@ import SidebarComponent from "./components/SidebarComponent.vue";
 
 .app-container {
   display: flex;
-}
-
-.main-content {
-  flex-grow: 1;
-  display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow: hidden;
+}
+
+.main-content-wrapper {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #ccd3d5, #ede8e8, #dfdfdf);
+  position: relative;
+  isolation: isolate;
+}
+
+.main-content-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../src/assets/imgs/background-img.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.2;
+  z-index: -1;
 }
 
 main {
   flex-grow: 1;
-  background: linear-gradient(to bottom, #ccd3d5, #ede8e8, #dfdfdf);
   overflow-y: auto;
 }
 </style>

@@ -12,7 +12,7 @@
         :title="column.title"
         :tasks="column.tasks"
         :projectUsers="store.projectUsers"
-        :gradientStyle="column.gradientStyle" 
+        :gradientStyle="column.gradientStyle"
         @addNewTask="store.addNewTask"
         @moveTask="store.handleMoveTask"
         @openTaskDetail="openDetailModal"
@@ -25,23 +25,23 @@
       v-if="selectedTask"
       :task="selectedTask"
       :projectUsers="store.projectUsers"
-      :priorities="store.priorities" 
+      :priorities="store.priorities"
       @close="closeDetailModal"
       @updateTask="handleUpdateTask"
     />
-    <div 
-      v-if="assigneePopup.isOpen" 
-      class="assignee-popup" 
+    <div
+      v-if="assigneePopup.isOpen"
+      class="assignee-popup"
       :style="{
         top: `${assigneePopup.top}px`,
         left: `${assigneePopup.left}px`,
       }"
       v-on-click-outside="() => (assigneePopup.isOpen = false)"
     >
-      <div 
-        v-for="user in store.projectUsers" 
-        :key="user.id" 
-        class="user-item" 
+      <div
+        v-for="user in store.projectUsers"
+        :key="user.id"
+        class="user-item"
         @click="assignTask(user.id)"
       >
         {{ user.name }}
@@ -186,7 +186,7 @@ function createNewColumn(newTitle) {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
-  background-color: #2b6cb0;
+  background-color: #1e1a3d;
   color: white;
   border: none;
   font-size: 2rem;

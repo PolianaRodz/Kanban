@@ -1,9 +1,7 @@
-/* src/assets/main.css */
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
-  background: linear-gradient(to bottom, #ffffff, #0959c9);
+  background: linear-gradient(to bottom, #ccd3d5, #ede8e8, #dfdfdf);
   min-height: 100vh;
 }

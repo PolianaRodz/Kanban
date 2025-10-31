@@ -8,14 +8,12 @@
       <button class="icon-button">
         <BellIcon :size="22" color="#8A94A6" />
       </button>
-      <div class="user-profile">
-        <img
-          src="../assets/imgs/taskbar-user.jpg"
-          alt="Avatar"
-          class="avatar"
-        />
 
-        <span>Otavio A.</span>
+      <div class="divider"></div>
+      <div class="user-profile">
+        <img src="@/assets/imgs/taskbar-user.jpg" alt="Avatar" class="avatar" />
+
+        <span>Usuario</span>
         <ChevronDownIcon :size="20" color="#8A94A6" />
       </div>
     </div>
@@ -37,12 +35,13 @@ import {
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(to right, #2d3748, #1a202c);
-  color: #e2e8f0;
+  color: #b6b8bb;
   padding: 0.75rem 1.5rem;
   height: 4rem;
   box-sizing: border-box;
   position: relative;
   isolation: isolate;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
 .navbar::before {
@@ -52,12 +51,7 @@ import {
   left: 0;
   right: 0;
   bottom: 0;
-
-  /* --- CORREÇÃO 2: O CAMINHO DA IMAGEM DE FUNDO ---
-    Trocamos o "../" por "@/"
-  */
   background-image: url("@/assets/imgs/navbar-background.jpg");
-
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -69,7 +63,13 @@ import {
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.7rem;
+}
+
+.divider {
+  width: 1.5px;
+  height: 4rem;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .logo-icon {
@@ -90,25 +90,11 @@ import {
   cursor: pointer;
 }
 
-/* --- CORREÇÃO 3: O CSS DO AVATAR ---
-  Modificamos o CSS para formatar a <img>
-*/
 .user-profile .avatar {
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 50%;
-
-  /* Isso faz a imagem preencher o círculo sem distorcer */
   object-fit: cover;
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 3));
-
-  /* Removemos o CSS antigo de texto e cor de fundo */
-  /* background-color: #63b3ed; */
-  /* color: #1a202c; */
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
-  /* font-weight: bold; */
-  /* font-size: 0.875rem; */
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
 }
 </style>
