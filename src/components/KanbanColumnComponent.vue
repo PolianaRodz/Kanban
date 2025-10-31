@@ -1,5 +1,10 @@
 <template>
   <div class="kanban-column" @dragover.prevent @drop="onDrop">
+    <div
+      class="column-color-bar"
+      :style="{ background: props.gradientStyle }"
+    ></div>
+
     <div class="column-header">
       <input
         v-if="isRenaming"
@@ -12,7 +17,9 @@
       <h3 v-else class="column-title" @dblclick="startRename">
         {{ title }}
       </h3>
-      <button class="options-btn" @click="handleDelete"><Trash2 :size="16" /></button>
+      <button class="options-btn" @click="handleDelete">
+        <Trash2 :size="16" />
+      </button>
     </div>
 
     <div class="cards-container">
@@ -46,10 +53,9 @@
   </div>
 </template>
 
-
 <script setup>
-import { ref, nextTick } from 'vue';
-import { Trash2, Plus } from "lucide-vue-next"; 
+import { ref, nextTick } from "vue";
+import { Trash2, Plus } from "lucide-vue-next";
 import TaskCardComponent from "./TaskcardComponent.vue";
 import CreateTaskForm from "./CreateTaskForm.vue";
 import ConfirmModal from "./ConfirmModal.vue";
@@ -65,34 +71,43 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+
+  gradientStyle: {
+    type: String,
+    default: "linear-gradient(to right, #6b7280, #4a5568)",
+  },
+  // -----------------------
 });
 
 const emit = defineEmits([
-  'addNewTask',
-  'moveTask',
-  'openTaskDetail',
-  'openAssigneePopup',
-  'renameColumn',
-  'deleteColumn'
+  "addNewTask",
+  "moveTask",
+  "openTaskDetail",
+  "openAssigneePopup",
+  "renameColumn",
+  "deleteColumn",
 ]);
 
 const isCreatingTask = ref(false);
 function handleCreateTask(newTask) {
-  emit('addNewTask', { task: newTask, columnTitle: props.title });
+  emit("addNewTask", { task: newTask, columnTitle: props.title });
   isCreatingTask.value = false;
 }
 
 function onDrop(event) {
   event.preventDefault();
-  const taskId = event.dataTransfer.getData('taskId');
+  const taskId = event.dataTransfer.getData("taskId");
   if (taskId) {
-    emit('moveTask', { taskId: parseInt(taskId), targetColumnTitle: props.title });
+    emit("moveTask", {
+      taskId: parseInt(taskId),
+      targetColumnTitle: props.title,
+    });
   }
 }
 
 const isRenaming = ref(false);
 const editableTitle = ref(props.title);
-const titleInput = ref(null); 
+const titleInput = ref(null);
 
 function startRename() {
   isRenaming.value = true;
@@ -103,7 +118,10 @@ function startRename() {
 
 function finishRename() {
   if (isRenaming.value) {
-    emit('renameColumn', { columnId: props.columnId, newTitle: editableTitle.value });
+    emit("renameColumn", {
+      columnId: props.columnId,
+      newTitle: editableTitle.value,
+    });
     isRenaming.value = false;
   }
 }
@@ -113,7 +131,7 @@ function handleDelete() {
   showDeleteModal.value = true;
 }
 function confirmDelete() {
-  emit('deleteColumn', props.columnId);
+  emit("deleteColumn", props.columnId);
   showDeleteModal.value = false;
 }
 function cancelDelete() {
@@ -122,53 +140,63 @@ function cancelDelete() {
 </script>
 
 <style scoped>
-  .kanban-column {
-    background-color: #e2e8f0;
-    border-radius: 0.75rem;
-    padding: 1rem;
-    min-width: 20rem;
-    max-width: 20rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+.kanban-column {
+  background-color: #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  min-width: 20rem;
+  max-width: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+}
 
-  .column-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.column-color-bar {
+  height: 10px;
+  margin-top: -1rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
 
-  .column-title {
-    font-weight: 600;
-  }
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .cards-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    flex-grow: 1;
-    overflow-y: auto;
-    min-height: 50px; 
-  }
+.column-title {
+  font-weight: 600;
+}
 
-  .options-btn, .add-card-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #718096;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-  }
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 50px;
+}
 
-  .add-card-btn {
-    justify-content: center;
-  }
+.options-btn,
+.add-card-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #718096;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
 
-  .options-btn:hover, .add-card-btn:hover {
-    background-color: #cbd5e0;
-  }
+.add-card-btn {
+  justify-content: center;
+}
+
+.options-btn:hover,
+.add-card-btn:hover {
+  background-color: #cbd5e0;
+}
 </style>
