@@ -7,8 +7,10 @@
   >
     <div class="card-header">
       <span
-        class="priority-tag"
-        :style="{ backgroundColor: task.priority.color }"
+        v-if="task.priority" class="priority-tag"
+        :style="{ 
+          background: task.priority.gradient 
+        }"
       >
         {{ task.priority.name }}
       </span>
@@ -70,6 +72,7 @@ function onDragStart(event) {
   .task-card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+  
   .priority-tag {
     font-size: 0.75rem;
     font-weight: 500;
@@ -77,7 +80,12 @@ function onDragStart(event) {
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
     display: inline-block;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.30); 
+    position: relative; 
+    z-index: 1; 
   }
+
+  
   .task-title {
     font-size: 0.875rem;
     color: #2d3748;

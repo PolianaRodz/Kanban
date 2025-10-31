@@ -12,8 +12,7 @@
         :title="column.title"
         :tasks="column.tasks"
         :projectUsers="store.projectUsers"
-        :color="column.color"
-        :gradientStyle="column.gradientStyle"
+        :gradientStyle="column.gradientStyle" 
         @addNewTask="store.addNewTask"
         @moveTask="store.handleMoveTask"
         @openTaskDetail="openDetailModal"
@@ -26,23 +25,23 @@
       v-if="selectedTask"
       :task="selectedTask"
       :projectUsers="store.projectUsers"
+      :priorities="store.priorities" 
       @close="closeDetailModal"
       @updateTask="handleUpdateTask"
     />
-
-    <div
-      v-if="assigneePopup.isOpen"
-      class="assignee-popup"
+    <div 
+      v-if="assigneePopup.isOpen" 
+      class="assignee-popup" 
       :style="{
         top: `${assigneePopup.top}px`,
         left: `${assigneePopup.left}px`,
       }"
       v-on-click-outside="() => (assigneePopup.isOpen = false)"
     >
-      <div
-        v-for="user in store.projectUsers"
-        :key="user.id"
-        class="user-item"
+      <div 
+        v-for="user in store.projectUsers" 
+        :key="user.id" 
+        class="user-item" 
         @click="assignTask(user.id)"
       >
         {{ user.name }}

@@ -2,9 +2,7 @@ import { defineStore } from "pinia";
 
 const LOCAL_STORAGE_KEY = "kanbanState";
 
-// --- ADICIONE ESTAS DUAS FUNÇÕES ---
 function getRandomHexColor() {
-  // Gera uma cor hexadecimal aleatória
   return (
     "#" +
     Math.floor(Math.random() * 16777215)
@@ -14,17 +12,25 @@ function getRandomHexColor() {
 }
 
 function getRandomGradient() {
-  // Gera uma string de gradiente linear com duas cores aleatórias e um ângulo aleatório
   const color1 = getRandomHexColor();
   const color2 = getRandomHexColor();
   const angle = Math.floor(Math.random() * 360);
   return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
 }
 
+
+const allPriorities = [
+  { name: "Alta Prioridade", gradient: "linear-gradient(to right, #ffc1c1ff, #ff0000ff)" },
+  { name: "Média Prioridade", gradient: "linear-gradient(to right, #eeeda6ff, #ffc400ff)" },
+  { name: "Baixa Prioridade", gradient: "linear-gradient(to right, #9cb9e5ff, #0540beff)" }
+];
+
+
 export const useKanbanStore = defineStore("kanban", {
   state: () => ({
     projectUsers: [],
     columns: [],
+    priorities: [], 
     isStateInitialized: false,
   }),
 
@@ -56,6 +62,7 @@ export const useKanbanStore = defineStore("kanban", {
         { id: "user2", name: "Bruno", avatar: "B" },
         { id: "user3", name: "Carla", avatar: "C" },
       ];
+      this.priorities = allPriorities;
       this.columns = [
         {
           id: 1,
@@ -66,7 +73,7 @@ export const useKanbanStore = defineStore("kanban", {
               id: 101,
               title: "Desenvolver a tela de login",
               description: "...",
-              priority: { name: "Alta Prioridade", color: "#D32F2F" },
+              priority: this.priorities[0], 
               comments: [],
               attachments: 1,
               assignee: "user1",
@@ -82,7 +89,7 @@ export const useKanbanStore = defineStore("kanban", {
               id: 102,
               title: "Corrigir bug no formulário",
               description: "...",
-              priority: { name: "Média Prioridade", color: "#FBC02D" },
+              priority: this.priorities[1], 
               comments: [],
               attachments: 2,
               assignee: null,
@@ -94,6 +101,20 @@ export const useKanbanStore = defineStore("kanban", {
               sprint: 1,
               effort: 3,
             },
+            {
+              id: 103,
+              title: "Atualizar ícone do footer",
+              description: "...",
+              priority: this.priorities[2],
+              comments: [],
+              attachments: 0,
+              assignee: null,
+              checklist: [],
+              createdAt: new Date().toISOString(),
+              completedAt: null,
+              sprint: 1,
+              effort: 1,
+            }
           ],
         },
         {
@@ -141,17 +162,34 @@ export const useKanbanStore = defineStore("kanban", {
     addNewTask({ task, columnTitle }) {
       const targetColumn = this.columns.find((c) => c.title === columnTitle);
       if (targetColumn) {
-        task.createdAt = new Date().toISOString();
-        task.completedAt = null;
-        task.sprint = 1;
-        task.effort = 3;
-        task.comments = [];
-        task.checklist = [];
-        targetColumn.tasks.push(task);
+        
+        const newTask = {
+          id: Date.now(), 
+          title: task.title, 
+          description: "", 
+          createdAt: new Date().toISOString(),
+          completedAt: null,
+          sprint: 1, 
+          effort: 3, 
+          comments: [], 
+          checklist: [], 
+          attachments: 0, 
+          assignee: null, 
+          priority: null 
+        };
+
+        if (task.priority && typeof task.priority === 'string') {
+          const priorityName = task.priority;
+          const foundPriority = this.priorities.find(p => p.name === priorityName);
+          newTask.priority = foundPriority ? foundPriority : this.priorities[2]; 
+        } else if (!task.priority) {
+          newTask.priority = this.priorities[2]; 
+        }
+        targetColumn.tasks.push(newTask);
         this.saveState();
       }
     },
-
+   
     handleMoveTask({ taskId, targetColumnTitle }) {
       let taskToMove;
       let sourceColumn;
