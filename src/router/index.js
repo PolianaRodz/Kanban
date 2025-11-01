@@ -1,30 +1,35 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import KanbanView from '../views/KanbanView.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import KanbanView from "../views/KanbanView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'kanban',
-      component: KanbanView
+      path: "/",
+      name: "auth",
+      component: () => import("../views/LoginView.vue"),
     },
     {
-      path: '/reports',
-      name: 'reports',
-      component: () => import('../views/ReportsView.vue')
+      path: "/kanban",
+      name: "kanban",
+      component: KanbanView,
     },
     {
-      path: '/team',
-      name: 'team',
-      component: () => import('../views/TeamView.vue')
+      path: "/reports",
+      name: "reports",
+      component: () => import("../views/ReportsView.vue"),
     },
     {
-      path: '/settings',
-      name: 'settings',
-      component: () => import('../views/SettingsView.vue')
+      path: "/team",
+      name: "team",
+      component: () => import("../views/TeamView.vue"),
     },
-  ]
-})
+    {
+      path: "/settings",
+      name: "settings",
+      component: () => import("../views/SettingsView.vue"),
+    },
+  ],
+});
 
-export default router
+export default router;

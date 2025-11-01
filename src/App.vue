@@ -1,9 +1,10 @@
 <template>
   <div class="app-container">
-    <NavbarComponent />
+    <NavbarComponent v-if="$route.name !== 'auth'" />
 
     <div class="main-content-wrapper">
-      <SidebarComponent />
+      <SidebarComponent v-if="$route.name !== 'auth'" />
+
       <main>
         <RouterView />
       </main>
@@ -12,7 +13,7 @@
 </template>
 
 <script setup>
-import { RouterView } from "vue-router";
+import { RouterView, useRoute } from "vue-router";
 import NavbarComponent from "./components/NavbarComponent.vue";
 import SidebarComponent from "./components/SidebarComponent.vue";
 </script>

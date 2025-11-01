@@ -1,7 +1,27 @@
-body {
+/* 1. Importa a fonte "Lato" (Regular 400, Bold 700 e Black 900) */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap");
+
+/* 2. Resets básicos (boa prática) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  padding: 0;
+  font: inherit; /* Faz botões e inputs herdarem a fonte */
+}
+
+/* 3. Estilos do Body (com a fonte Lato adicionada) */
+body {
+  /* Adiciona 'Lato' ao início da lista */
+  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
+
+  /* Suas regras de fundo (mantidas) */
   background: linear-gradient(to bottom, #ccd3d5, #ede8e8, #dfdfdf);
   min-height: 100vh;
+
+  /* Melhora a renderização da fonte */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
