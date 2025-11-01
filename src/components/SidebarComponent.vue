@@ -2,7 +2,7 @@
   <aside class="sidebar">
     <div class="sidebar-content">
       <nav class="main-nav">
-        <RouterLink to="/" class="nav-link" title="Quadro Kanban">
+        <RouterLink to="/kanban" class="nav-link" title="Quadro Kanban">
           <LayoutGrid :size="35" />
         </RouterLink>
         <RouterLink to="/team" class="nav-link" title="Equipe">
