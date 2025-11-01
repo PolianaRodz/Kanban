@@ -5,7 +5,7 @@
 Este projeto é uma aplicação de quadro Kanban interativa, desenvolvida com Vue 3 e Vite. Ele permite aos usuários gerenciar tarefas visualmente através de colunas, com funcionalidade de drag-and-drop, criação, edição e exclusão de tarefas.
 
 A aplicação inclui gerenciamento de estado centralizado com Pinia, garantindo que os dados sejam consistentes em toda a interface, e utiliza o localStorage para persistir o estado do quadro, salvando o trabalho do usuário entre as sessões.
-fhuhoe
+
 ---
 
 ## Features
